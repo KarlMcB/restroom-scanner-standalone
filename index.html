@@ -370,7 +370,7 @@
     .pin-title  { font-size: 16px; font-weight: 600; color: rgba(255,255,255,0.85); margin-bottom: 20px; letter-spacing: 0.02em; }
     .pin-dots   { display: flex; gap: 14px; margin-bottom: 16px; }
     .pin-dot    { width: 16px; height: 16px; border-radius: 50%; border: 2px solid rgba(255,255,255,0.35); background: transparent; transition: background 0.15s, border-color 0.15s; }
-    .pin-dot.filled { background: #A78BFA; border-color: #A78BFA; }
+    .pin-dot.filled { background: var(--accent); border-color: var(--accent); }
     .pin-error  { font-size: 13px; color: #FDA4AF; font-weight: 500; opacity: 0; transition: opacity 0.2s; margin-top: 4px; }
     .pin-error.show { opacity: 1; }
     .pin-cancel { font-size: 12px; color: rgba(255,255,255,0.35); margin-top: 18px; cursor: pointer; letter-spacing: 0.04em; }
@@ -888,19 +888,14 @@
     updateRosterIndicator();
   }
 
-  /* Update header dot and settings text to reflect roster state */
+  /* Update settings text to reflect roster state */
   function updateRosterIndicator() {
-    const dot        = document.getElementById('sync-dot');
-    const label      = document.getElementById('sync-label');
     const statusText = document.getElementById('roster-status-text');
+    if (!statusText) return;
     if (roster && roster.size > 0) {
-      dot.className     = 'sync-dot ok';
-      label.textContent = roster.size + ' students';
-      if (statusText) statusText.textContent = roster.size + ' students loaded.';
+      statusText.textContent = roster.size + ' students loaded.';
     } else {
-      dot.className     = 'sync-dot';
-      label.textContent = 'no roster';
-      if (statusText) statusText.textContent = 'No roster loaded — all IDs will be accepted.';
+      statusText.textContent = 'No roster loaded — all IDs will be accepted.';
     }
   }
 
