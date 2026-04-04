@@ -407,7 +407,18 @@
       margin-bottom: 1.25rem;
     }
     @media (orientation: portrait) {
-      .numpad { margin-top: 1.5rem; }
+      html, body { height: 100%; overflow: hidden; }
+      #app {
+        height: 100vh; height: 100dvh;
+        display: flex; flex-direction: column;
+        padding-bottom: 0.5rem; overflow: hidden;
+      }
+      #log-section {
+        flex: 1; display: flex; flex-direction: column;
+        min-height: 0; margin-bottom: 0; overflow: hidden;
+      }
+      .log-wrapper { flex: 1; overflow-y: auto; min-height: 0; }
+      .numpad { margin-top: 0.75rem; margin-bottom: 0; }
     }
     .numpad button {
       touch-action: manipulation;
