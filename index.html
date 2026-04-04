@@ -1430,6 +1430,26 @@
     if (e.target === document.getElementById('sheet-viewer-overlay')) closeSheetViewer();
   }
 
+  /* ── Keyboard support for the numpad ── */
+  document.addEventListener('keydown', function(e) {
+    // Don't intercept when a settings input (number/url/non-manual text) has focus
+    const el  = document.activeElement;
+    const tag = el ? el.tagName : '';
+    if (tag === 'TEXTAREA') return;
+    if (tag === 'INPUT' && el.id !== 'manual-input') return;
+
+    if (e.key >= '0' && e.key <= '9') {
+      e.preventDefault();
+      numpadPress(e.key);
+    } else if (e.key === 'Backspace' || e.key === 'Delete') {
+      e.preventDefault();
+      numpadDelete();
+    } else if (e.key === 'Enter') {
+      e.preventDefault();
+      manualLog();
+    }
+  });
+
   /* ── Init ── */
   loadSettings();
   loadFromStorage();
