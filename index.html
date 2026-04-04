@@ -633,14 +633,11 @@
     <div class="header-left">
       <div class="header-titles">
         <h1>Restroom Pass Manager</h1>
-        <p class="subtitle">Scan a student ID to check out or check in</p>
+
       </div>
     </div>
     <div style="display:flex;align-items:center;gap:10px;">
-      <div id="sync-status">
-        <div class="sync-dot" id="sync-dot"></div>
-        <span id="sync-label">no roster</span>
-      </div>
+
       <button id="hamburger" onclick="openSettings()" aria-label="Settings">
         <span></span><span></span><span></span>
       </button>
@@ -654,7 +651,7 @@
     <div id="scan-flash"></div>
     <div class="corner tl"></div><div class="corner tr"></div>
     <div class="corner bl"></div><div class="corner br"></div>
-    <div id="overlay-msg">Camera off — Tap to Scan ID</div>
+    <div id="overlay-msg"></div>
     <div id="checkout-overlay">
       <div class="checkout-msg">See You Soon!<br>Please Take The Pass</div>
     </div>
@@ -694,7 +691,7 @@
   </div>
 
   <div class="btn-row">
-    <button id="start-btn" onclick="toggleCamera()">Start scanning</button>
+    <button id="start-btn" onclick="toggleCamera()">Tap to Scan ID</button>
   </div>
 
   <div id="log-section">
@@ -1170,9 +1167,9 @@
     cameraOn = false;
     document.getElementById('scan-line').classList.remove('active');
     const btn = document.getElementById('start-btn');
-    btn.textContent  = 'Start scanning';
+    btn.textContent  = 'Tap to Scan ID';
     btn.style.cssText = '';
-    document.getElementById('overlay-msg').textContent = 'Camera off — Tap to Scan ID';
+    document.getElementById('overlay-msg').textContent = '';
   }
 
   async function toggleCamera() {
