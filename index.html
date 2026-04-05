@@ -41,6 +41,25 @@
       --shadow-btn:    0 2px 10px rgba(22,163,74,0.30);
     }
 
+    /* ── Purple theme (login / account creation / class selection) ── */
+    body.state-input {
+      --page-bg:      #faf5ff;
+      --card-bg:      #ffffff;
+      --card-bg2:     #faf5ff;
+      --accent:       #9333ea;
+      --accent-light: #f3e8ff;
+      --accent-dark:  #7e22ce;
+      --accent2:      #c084fc;
+      --text:         #3b0764;
+      --text-muted:   #9270c0;
+      --border:       rgba(147,51,234,0.12);
+      --border-med:   rgba(147,51,234,0.28);
+      --grad-main:    linear-gradient(135deg, #9333ea, #c084fc);
+      --grad-start:   linear-gradient(135deg, #7e22ce, #9333ea);
+      --shadow-card:  0 4px 20px rgba(147,51,234,0.10);
+      --shadow-btn:   0 2px 10px rgba(147,51,234,0.30);
+    }
+
     /* ── Red theme (someone is checked out) ── */
     body.state-out {
       --page-bg:       #fff1f2;
@@ -549,6 +568,128 @@
     #app.landscape-layout .manual-row { margin-bottom: 0.5rem; }
     #app.landscape-layout .numpad { margin-bottom: 0; }
 
+    /* ── Setup flow (login / account creation / class selection) ── */
+    #setup-flow {
+      display: none; position: fixed; inset: 0; z-index: 500;
+      background: var(--page-bg); overflow-y: auto;
+    }
+    #setup-flow.show { display: flex; align-items: center; justify-content: center; }
+    .setup-inner {
+      width: 100%; max-width: 380px; min-height: 100vh;
+      padding: 1.5rem 1.25rem 2rem;
+      display: flex; flex-direction: column; align-items: center;
+    }
+    .setup-back {
+      align-self: flex-start; background: var(--accent-light); border: none;
+      color: var(--accent-dark); border-radius: var(--radius-md);
+      padding: 8px 14px; font-size: 15px; font-weight: 500; cursor: pointer;
+      margin-bottom: 1rem; -webkit-tap-highlight-color: transparent;
+      min-width: unset; flex: none;
+    }
+    .setup-back:active { transform: scale(0.95); }
+    .setup-back.invisible { visibility: hidden; }
+    .setup-spacer { flex: 1; min-height: 0.75rem; max-height: 3rem; }
+    .setup-title {
+      font-size: 28px; font-weight: 700; text-align: center;
+      margin-bottom: 6px; letter-spacing: -0.02em;
+      background: var(--grad-main); -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .setup-subtitle {
+      font-size: 14px; color: var(--text-muted);
+      text-align: center; margin-bottom: 1.5rem; line-height: 1.5;
+    }
+    .setup-display {
+      width: 100%; padding: 14px 20px; border-radius: var(--radius-md);
+      border: 2px solid var(--border-med); background: var(--card-bg);
+      font-size: 28px; font-weight: 700; text-align: center;
+      letter-spacing: 0.08em; margin-bottom: 1.25rem;
+      box-shadow: var(--shadow-card); min-height: 62px;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--text);
+    }
+    .setup-display.placeholder { color: var(--text-muted); font-size: 14px; font-weight: 400; letter-spacing: 0; }
+    .setup-name-input {
+      width: 100%; padding: 14px 20px; border-radius: var(--radius-md);
+      border: 2px solid var(--border-med); background: var(--card-bg);
+      color: var(--text); font-size: 20px; font-weight: 600;
+      text-align: center; margin-bottom: 1.25rem; box-shadow: var(--shadow-card);
+      outline: none; display: block;
+    }
+    .setup-name-input:focus { border-color: var(--accent); }
+    .setup-name-input::placeholder { color: var(--text-muted); font-size: 14px; font-weight: 400; }
+    .setup-dots { display: flex; gap: 16px; margin-bottom: 1.25rem; }
+    .setup-dot {
+      width: 18px; height: 18px; border-radius: 50%;
+      border: 2px solid var(--border-med); background: transparent;
+      transition: background 0.15s, border-color 0.15s;
+    }
+    .setup-dot.filled { background: var(--accent); border-color: var(--accent); }
+    .setup-error {
+      font-size: 13px; color: #be185d; font-weight: 500;
+      opacity: 0; transition: opacity 0.2s; margin-bottom: 0.75rem;
+      text-align: center; min-height: 20px;
+    }
+    .setup-error.show { opacity: 1; }
+    .setup-numpad {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;
+      width: 100%; margin-bottom: 1rem;
+    }
+    .setup-numpad button {
+      touch-action: manipulation;
+      padding: 16px 8px; font-size: 22px; font-weight: 500;
+      border-radius: var(--radius-md); border: 1.5px solid var(--border-med);
+      background: var(--card-bg); color: var(--text); cursor: pointer;
+      min-width: unset; -webkit-tap-highlight-color: transparent;
+      transition: transform 0.1s; box-shadow: var(--shadow-card); flex: none;
+    }
+    .setup-numpad button:active { transform: scale(0.93); }
+    .setup-numpad .snp-del { font-size: 20px; color: var(--text-muted); }
+    .setup-numpad .snp-ok {
+      background: var(--grad-main); color: #fff; border: none;
+      font-size: 15px; font-weight: 700; box-shadow: var(--shadow-btn);
+    }
+    .setup-continue-btn {
+      width: 100%; padding: 14px; background: var(--grad-main);
+      color: #fff; border: none; border-radius: var(--radius-md);
+      font-size: 16px; font-weight: 700; cursor: pointer; margin-bottom: 0.75rem;
+      box-shadow: var(--shadow-btn); -webkit-tap-highlight-color: transparent;
+      min-width: unset; flex: none; display: block;
+    }
+    .setup-continue-btn:active { transform: scale(0.97); }
+    .class-grid {
+      display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px;
+      width: 100%; margin-bottom: 1rem;
+    }
+    .class-btn {
+      padding: 20px 12px; background: var(--card-bg);
+      border: 2px solid var(--border-med); border-radius: var(--radius-lg);
+      color: var(--text); font-size: 15px; font-weight: 600;
+      cursor: pointer; text-align: center; box-shadow: var(--shadow-card);
+      -webkit-tap-highlight-color: transparent; min-width: unset; flex: none;
+      transition: transform 0.1s, background 0.15s, border-color 0.15s;
+    }
+    .class-btn:active { transform: scale(0.96); background: var(--accent-light); border-color: var(--accent); }
+    .setup-link {
+      font-size: 13px; color: var(--accent); cursor: pointer;
+      text-decoration: underline; text-align: center; padding: 8px 4px;
+      -webkit-tap-highlight-color: transparent; margin-top: 0.25rem;
+    }
+    .setup-link:active { opacity: 0.6; }
+    #setting-classes {
+      width: 100%; padding: 8px 10px; border-radius: var(--radius-md);
+      border: 1.5px solid var(--sp-border-med); background: #fff;
+      color: var(--sp-text); font-size: 13px; resize: vertical;
+      font-family: inherit; outline: none; margin-top: 6px;
+      min-height: 100px; line-height: 1.6;
+    }
+    #setting-classes:focus { border-color: var(--sp-accent); }
+    #settings-panel #switch-class-btn, #settings-panel #sign-out-btn {
+      background: var(--sp-accent-lt) !important;
+      color: var(--sp-accent-dk) !important;
+      border-color: var(--sp-accent) !important;
+    }
+
     /* ── Toast ── */
     .toast {
       position: fixed; top: 1.25rem; left: 50%; transform: translateX(-50%);
@@ -561,6 +702,65 @@
   </style>
 </head>
 <body>
+
+<!-- Setup flow: employee login / account creation / class selection -->
+<div id="setup-flow">
+  <div class="setup-inner">
+    <button class="setup-back invisible" id="setup-back-btn" onclick="setupBack()">← Back</button>
+    <div class="setup-spacer"></div>
+
+    <div class="setup-title" id="setup-title"></div>
+    <div class="setup-subtitle" id="setup-subtitle"></div>
+
+    <!-- Number display (employee ID entry) -->
+    <div class="setup-display placeholder" id="setup-display" style="display:none">Employee #</div>
+
+    <!-- Name text input (account creation) -->
+    <input class="setup-name-input" id="setup-name-input" type="text"
+           placeholder="Your name" autocomplete="off" spellcheck="false"
+           style="display:none"
+           onkeydown="if(event.key==='Enter')setupContinue()" />
+
+    <!-- PIN dots -->
+    <div class="setup-dots" id="setup-dots" style="display:none">
+      <div class="setup-dot" id="sd-0"></div>
+      <div class="setup-dot" id="sd-1"></div>
+      <div class="setup-dot" id="sd-2"></div>
+      <div class="setup-dot" id="sd-3"></div>
+    </div>
+
+    <div class="setup-error" id="setup-error"></div>
+
+    <!-- Class selection grid -->
+    <div class="class-grid" id="class-grid" style="display:none"></div>
+
+    <!-- Shared numpad (employee ID + PIN steps) -->
+    <div class="setup-numpad" id="setup-numpad" style="display:none">
+      <button onclick="setupNumpad('1')">1</button>
+      <button onclick="setupNumpad('2')">2</button>
+      <button onclick="setupNumpad('3')">3</button>
+      <button onclick="setupNumpad('4')">4</button>
+      <button onclick="setupNumpad('5')">5</button>
+      <button onclick="setupNumpad('6')">6</button>
+      <button onclick="setupNumpad('7')">7</button>
+      <button onclick="setupNumpad('8')">8</button>
+      <button onclick="setupNumpad('9')">9</button>
+      <button class="snp-del" onclick="setupNumpadDel()">⌫</button>
+      <button onclick="setupNumpad('0')">0</button>
+      <button class="snp-ok" id="snp-ok" onclick="setupContinue()">Next →</button>
+    </div>
+
+    <!-- Continue button (name step only) -->
+    <button class="setup-continue-btn" id="setup-continue-btn"
+            style="display:none" onclick="setupContinue()">Continue →</button>
+
+    <!-- Secondary action link -->
+    <div class="setup-link" id="setup-link" style="display:none"></div>
+
+    <div class="setup-spacer"></div>
+  </div>
+</div>
+
 <div id="app">
 
   <!-- Settings drawer -->
@@ -568,6 +768,13 @@
     <div id="settings-panel">
       <h2>Settings <button id="close-settings" onclick="closeSettings()">✕</button></h2>
 
+      <div class="setting-section-title">Session</div>
+      <div class="setting-desc" id="session-user-text">Not signed in</div>
+      <div class="setting-desc" id="session-class-text" style="margin-top:2px"></div>
+      <button id="switch-class-btn" onclick="openClassSelect()">Switch Class</button>
+      <button id="sign-out-btn" onclick="setupLogout()">Sign Out</button>
+
+      <hr class="setting-divider" />
       <div class="setting-section-title">Behavior</div>
 
       <div class="setting-group">
@@ -612,6 +819,11 @@
       <input type="file" id="roster-file-input" accept=".csv,text/csv" style="display:none" onchange="handleRosterUpload(event)" />
 
       <hr class="setting-divider" />
+      <div class="setting-section-title">Classes</div>
+      <div class="setting-desc">One class name per line. These appear on the class selection screen.</div>
+      <textarea id="setting-classes" rows="6"></textarea>
+
+      <hr class="setting-divider" />
       <div class="setting-section-title">Data</div>
       <button id="view-sheet-btn" onclick="openSheetViewer()">View activity log</button>
       <button id="export-csv-btn" onclick="exportLogCSV()">Export log as CSV</button>
@@ -633,7 +845,7 @@
     <div class="header-left">
       <div class="header-titles">
         <h1>Restroom Pass Manager</h1>
-
+        <div class="subtitle" id="header-class-name" style="display:none"></div>
       </div>
     </div>
     <div style="display:flex;align-items:center;gap:10px;">
@@ -779,6 +991,9 @@
     document.getElementById('setting-max-weekly').value = settings.maxWeeklyLeaves;
     loadRosterFromStorage();
     applyOrientation();
+    const clsRaw = localStorage.getItem('teacher_classes');
+    const cls = clsRaw ? JSON.parse(clsRaw) : ['Period 1','Period 2','Period 3','Period 4','Period 5','Period 6'];
+    document.getElementById('setting-classes').value = cls.join('\n');
   }
 
   function saveSettings() {
@@ -786,11 +1001,15 @@
     settings.maxDailyLeaves  = parseInt(document.getElementById('setting-max-daily').value)  || 0;
     settings.maxWeeklyLeaves = parseInt(document.getElementById('setting-max-weekly').value) || 0;
     try { localStorage.setItem(SETTINGS_KEY, JSON.stringify(settings)); } catch(e) {}
+    const clsText = document.getElementById('setting-classes').value;
+    const parsed  = clsText.split('\n').map(s => s.trim()).filter(Boolean);
+    teacherClasses = parsed.length ? parsed : ['Period 1','Period 2','Period 3','Period 4','Period 5','Period 6'];
+    try { localStorage.setItem('teacher_classes', JSON.stringify(teacherClasses)); } catch(e) {}
     closeSettings();
     showToast('Settings saved', 'neutral');
   }
 
-  function openSettings()  { showPinPrompt(); }
+  function openSettings()  { updateSessionInfo(); showPinPrompt(); }
   function closeSettings() {
     document.getElementById('settings-overlay').classList.remove('open');
   }
@@ -1466,11 +1685,386 @@
     if (e.target === document.getElementById('sheet-viewer-overlay')) closeSheetViewer();
   }
 
-  /* ── Keyboard support for the numpad ── */
+  /* ══════════════════════════════════════════════════════
+     SETUP FLOW  (login / account creation / class select)
+  ══════════════════════════════════════════════════════ */
+  let setupCurrentStep = '';
+  let setupBuffer      = '';   // employee-ID digits
+  let setupPinBuffer   = '';   // PIN digits being entered
+  let setupNewPin      = '';   // captured on create-pin step
+  let setupTempName    = '';   // name during account creation
+  let setupTempId      = '';   // ID confirmed before PIN step
+  let accounts         = [];
+  let currentUser      = null;
+  let currentClass     = '';
+  let teacherClasses   = ['Period 1','Period 2','Period 3','Period 4','Period 5','Period 6'];
+
+  function initSetupFlow() {
+    accounts       = JSON.parse(localStorage.getItem('teacher_accounts') || '[]');
+    teacherClasses = JSON.parse(localStorage.getItem('teacher_classes')  ||
+                     JSON.stringify(['Period 1','Period 2','Period 3','Period 4','Period 5','Period 6']));
+
+    const savedId    = localStorage.getItem('current_user_id');
+    const savedClass = localStorage.getItem('current_class');
+    if (savedId && savedClass) {
+      const found = accounts.find(a => a.id === savedId);
+      if (found) {
+        currentUser  = found;
+        currentClass = savedClass;
+        updateHeaderClass();
+        return;
+      }
+    }
+    showSetupFlow();
+    goToStep(accounts.length > 0 ? 'login-id' : 'create-name');
+  }
+
+  function showSetupFlow() {
+    document.body.classList.add('state-input');
+    document.getElementById('setup-flow').classList.add('show');
+  }
+
+  function hideSetupFlow() {
+    document.getElementById('setup-flow').classList.remove('show');
+    document.body.classList.remove('state-input');
+  }
+
+  function goToStep(step) {
+    setupCurrentStep = step;
+    setupBuffer      = '';
+    setupPinBuffer   = '';
+
+    const back      = document.getElementById('setup-back-btn');
+    const display   = document.getElementById('setup-display');
+    const nameInput = document.getElementById('setup-name-input');
+    const dots      = document.getElementById('setup-dots');
+    const numpad    = document.getElementById('setup-numpad');
+    const contBtn   = document.getElementById('setup-continue-btn');
+    const linkEl    = document.getElementById('setup-link');
+    const errorEl   = document.getElementById('setup-error');
+    const classGrid = document.getElementById('class-grid');
+
+    [display, nameInput, dots, numpad, contBtn, linkEl, classGrid]
+      .forEach(el => { el.style.display = 'none'; });
+    errorEl.classList.remove('show');
+    back.classList.add('invisible');
+
+    switch (step) {
+      case 'login-id':
+        setT('setup-title',    'Welcome');
+        setT('setup-subtitle', 'Enter your employee number to sign in');
+        setDisplayVal('');
+        display.style.display = '';
+        numpad.style.display  = 'grid';
+        showSnpOk('Next →');
+        linkEl.textContent   = 'New here? Create an account';
+        linkEl.onclick       = () => goToStep('create-name');
+        linkEl.style.display = '';
+        break;
+
+      case 'login-pin': {
+        back.classList.remove('invisible');
+        const u = accounts.find(a => a.id === setupTempId);
+        setT('setup-title',    u ? `Hi, ${u.name.split(' ')[0]}!` : 'Enter PIN');
+        setT('setup-subtitle', 'Enter your 4-digit PIN');
+        refreshSetupDots(0);
+        dots.style.display   = '';
+        numpad.style.display = 'grid';
+        hideSnpOk();
+        break;
+      }
+
+      case 'create-name':
+        if (accounts.length > 0) back.classList.remove('invisible');
+        setT('setup-title',    'Create Account');
+        setT('setup-subtitle', "What's your name?");
+        nameInput.value         = '';
+        nameInput.style.display = 'block';
+        contBtn.style.display   = 'block';
+        setTimeout(() => nameInput.focus(), 80);
+        break;
+
+      case 'create-id':
+        back.classList.remove('invisible');
+        setT('setup-title',    'Your Employee Number');
+        setT('setup-subtitle', "You'll use this to sign in each day");
+        setDisplayVal('');
+        display.style.display = '';
+        numpad.style.display  = 'grid';
+        showSnpOk('Next →');
+        break;
+
+      case 'create-pin':
+        back.classList.remove('invisible');
+        setT('setup-title',    'Create a PIN');
+        setT('setup-subtitle', 'Choose a 4-digit PIN');
+        refreshSetupDots(0);
+        dots.style.display   = '';
+        numpad.style.display = 'grid';
+        hideSnpOk();
+        break;
+
+      case 'create-confirm':
+        back.classList.remove('invisible');
+        setT('setup-title',    'Confirm PIN');
+        setT('setup-subtitle', 'Enter your PIN again to confirm');
+        refreshSetupDots(0);
+        dots.style.display   = '';
+        numpad.style.display = 'grid';
+        hideSnpOk();
+        break;
+
+      case 'class-select':
+        setT('setup-title',    currentUser ? `Hi, ${currentUser.name.split(' ')[0]}!` : 'Select Class');
+        setT('setup-subtitle', 'Which class are you teaching right now?');
+        renderClassGrid();
+        classGrid.style.display = 'grid';
+        linkEl.textContent   = 'Sign out';
+        linkEl.onclick       = setupLogout;
+        linkEl.style.display = '';
+        break;
+    }
+  }
+
+  /* ── Step helpers ── */
+  function setT(id, text) { document.getElementById(id).textContent = text; }
+
+  function setDisplayVal(val) {
+    const el = document.getElementById('setup-display');
+    if (!val) { el.textContent = 'Employee #'; el.classList.add('placeholder'); }
+    else       { el.textContent = val;          el.classList.remove('placeholder'); }
+  }
+
+  function refreshSetupDots(count) {
+    for (let i = 0; i < 4; i++)
+      document.getElementById('sd-' + i).classList.toggle('filled', i < count);
+  }
+
+  function showSnpOk(label) {
+    const b = document.getElementById('snp-ok');
+    b.textContent = label; b.style.opacity = ''; b.style.pointerEvents = '';
+  }
+  function hideSnpOk() {
+    const b = document.getElementById('snp-ok');
+    b.style.opacity = '0'; b.style.pointerEvents = 'none';
+  }
+
+  function showSetupError(msg) {
+    const el = document.getElementById('setup-error');
+    el.textContent = msg;
+    el.classList.add('show');
+    setTimeout(() => el.classList.remove('show'), 3500);
+  }
+
+  /* ── Numpad input ── */
+  function setupNumpad(digit) {
+    switch (setupCurrentStep) {
+      case 'login-id':
+      case 'create-id':
+        if (setupBuffer.length >= 12) return;
+        setupBuffer += digit;
+        setDisplayVal(setupBuffer);
+        break;
+      case 'login-pin':
+        if (setupPinBuffer.length >= 4) return;
+        setupPinBuffer += digit;
+        refreshSetupDots(setupPinBuffer.length);
+        if (setupPinBuffer.length === 4) submitLoginPin();
+        break;
+      case 'create-pin':
+        if (setupPinBuffer.length >= 4) return;
+        setupPinBuffer += digit;
+        refreshSetupDots(setupPinBuffer.length);
+        if (setupPinBuffer.length === 4) {
+          setupNewPin = setupPinBuffer;
+          goToStep('create-confirm');
+        }
+        break;
+      case 'create-confirm':
+        if (setupPinBuffer.length >= 4) return;
+        setupPinBuffer += digit;
+        refreshSetupDots(setupPinBuffer.length);
+        if (setupPinBuffer.length === 4) submitCreateConfirm();
+        break;
+    }
+  }
+
+  function setupNumpadDel() {
+    switch (setupCurrentStep) {
+      case 'login-id':
+      case 'create-id':
+        setupBuffer = setupBuffer.slice(0, -1);
+        setDisplayVal(setupBuffer);
+        break;
+      case 'login-pin':
+      case 'create-pin':
+      case 'create-confirm':
+        setupPinBuffer = setupPinBuffer.slice(0, -1);
+        refreshSetupDots(setupPinBuffer.length);
+        break;
+    }
+  }
+
+  function setupContinue() {
+    switch (setupCurrentStep) {
+      case 'login-id':
+        if (!setupBuffer) return;
+        setupTempId = setupBuffer;
+        if (!accounts.find(a => a.id === setupTempId)) {
+          showSetupError('Employee number not found. Check your number or create an account.');
+          return;
+        }
+        goToStep('login-pin');
+        break;
+      case 'create-id':
+        if (!setupBuffer) return;
+        if (accounts.find(a => a.id === setupBuffer)) {
+          showSetupError('That employee number is already in use.');
+          return;
+        }
+        setupTempId = setupBuffer;
+        goToStep('create-pin');
+        break;
+      case 'create-name':
+        continueCreateName();
+        break;
+    }
+  }
+
+  function continueCreateName() {
+    const name = document.getElementById('setup-name-input').value.trim();
+    if (!name) { document.getElementById('setup-name-input').focus(); return; }
+    setupTempName = name;
+    goToStep('create-id');
+  }
+
+  function submitLoginPin() {
+    const user = accounts.find(a => a.id === setupTempId);
+    if (user && setupPinBuffer === user.pin) {
+      currentUser = user;
+      try { localStorage.setItem('current_user_id', user.id); } catch(e) {}
+      goToStep('class-select');
+    } else {
+      showSetupError('Incorrect PIN. Please try again.');
+      setupPinBuffer = '';
+      refreshSetupDots(0);
+    }
+  }
+
+  function submitCreateConfirm() {
+    if (setupPinBuffer !== setupNewPin) {
+      showSetupError("PINs don't match. Try again.");
+      setupPinBuffer = '';
+      refreshSetupDots(0);
+      return;
+    }
+    const newAcc = { id: setupTempId, name: setupTempName, pin: setupNewPin };
+    accounts.push(newAcc);
+    try { localStorage.setItem('teacher_accounts', JSON.stringify(accounts)); } catch(e) {}
+    currentUser = newAcc;
+    try { localStorage.setItem('current_user_id', newAcc.id); } catch(e) {}
+    goToStep('class-select');
+  }
+
+  function setupBack() {
+    const map = {
+      'login-pin':      'login-id',
+      'create-name':    accounts.length > 0 ? 'login-id' : null,
+      'create-id':      'create-name',
+      'create-pin':     'create-id',
+      'create-confirm': 'create-pin',
+    };
+    const dest = map[setupCurrentStep];
+    if (dest) goToStep(dest);
+  }
+
+  /* ── Class selection ── */
+  function renderClassGrid() {
+    const grid = document.getElementById('class-grid');
+    grid.innerHTML = '';
+    teacherClasses.forEach(cls => {
+      const btn = document.createElement('button');
+      btn.className   = 'class-btn';
+      btn.textContent = cls;
+      btn.onclick     = () => selectClass(cls);
+      grid.appendChild(btn);
+    });
+  }
+
+  function selectClass(cls) {
+    currentClass = cls;
+    try { localStorage.setItem('current_class', cls); } catch(e) {}
+    updateHeaderClass();
+    hideSetupFlow();
+  }
+
+  function updateHeaderClass() {
+    const el = document.getElementById('header-class-name');
+    if (!el) return;
+    if (currentClass) { el.textContent = currentClass; el.style.display = ''; }
+    else               { el.style.display = 'none'; }
+  }
+
+  function openClassSelect() {
+    closeSettings();
+    showSetupFlow();
+    goToStep('class-select');
+  }
+
+  function setupLogout() {
+    currentUser  = null;
+    currentClass = '';
+    localStorage.removeItem('current_user_id');
+    localStorage.removeItem('current_class');
+    updateHeaderClass();
+    closeSettings();
+    showSetupFlow();
+    goToStep(accounts.length > 0 ? 'login-id' : 'create-name');
+  }
+
+  function updateSessionInfo() {
+    const uEl = document.getElementById('session-user-text');
+    const cEl = document.getElementById('session-class-text');
+    if (uEl) uEl.textContent = currentUser  ? `Signed in: ${currentUser.name}` : 'Not signed in';
+    if (cEl) cEl.textContent = currentClass ? `Class: ${currentClass}`          : '';
+  }
+
+  /* ── Keyboard support for the numpad and PIN overlay ── */
   document.addEventListener('keydown', function(e) {
-    // Don't intercept when a settings input (number/url/non-manual text) has focus
     const el  = document.activeElement;
     const tag = el ? el.tagName : '';
+
+    // Handle keyboard when setup flow is active
+    if (document.getElementById('setup-flow').classList.contains('show')) {
+      if (tag === 'INPUT') return; // let the name text field handle its own keys
+      if (e.key >= '0' && e.key <= '9') {
+        e.preventDefault(); setupNumpad(e.key);
+      } else if (e.key === 'Backspace' || e.key === 'Delete') {
+        e.preventDefault(); setupNumpadDel();
+      } else if (e.key === 'Enter') {
+        e.preventDefault(); setupContinue();
+      } else if (e.key === 'Escape') {
+        e.preventDefault(); setupBack();
+      }
+      return;
+    }
+
+    // Always handle keyboard input when the PIN overlay is active
+    if (pinMode) {
+      if (e.key >= '0' && e.key <= '9') {
+        e.preventDefault();
+        numpadPress(e.key);
+      } else if (e.key === 'Backspace' || e.key === 'Delete') {
+        e.preventDefault();
+        numpadDelete();
+      } else if (e.key === 'Escape') {
+        e.preventDefault();
+        hidePinPrompt();
+      }
+      return;
+    }
+
+    // Don't intercept when a settings input (number/url/non-manual text) has focus
     if (tag === 'TEXTAREA') return;
     if (tag === 'INPUT' && el.id !== 'manual-input') return;
 
@@ -1487,6 +2081,7 @@
   });
 
   /* ── Init ── */
+  initSetupFlow();
   loadSettings();
   loadFromStorage();
   setInterval(() => { if (Object.values(studentStatus).some(v => v === 'out')) updateTable(); }, 10000);
